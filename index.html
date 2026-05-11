@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yatharth Vardan - Solutions Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --bg: #f8f9fa;
+            --text: #333;
+            --light: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-fade {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            animation: pulse 3s infinite;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--light);
+            border: 4px solid var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s ease-out;
+        }
+
+        section.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.4rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--light);
+            box-shadow: 0 0 0 4px var(--secondary);
+        }
+
+        .timeline-content {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Education Cards */
+        .edu-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .edu-card {
+            flex: 1;
+            min-width: 300px;
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .edu-card:hover {
+            transform: scale(1.02);
+        }
+
+        .edu-card::after {
+            content: '\f19d';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 8rem;
+            opacity: 0.1;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .contact-section h2 {
+            color: var(--light);
+            border-bottom-color: var(--accent);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: var(--secondary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .timeline::before { left: 15px; }
+            .timeline-item::before { left: -1.2rem; }
+            .timeline { padding-left: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="animate-fade">
+        <div class="profile-container">
+            <!-- Placeholder for photo -->
+            <div class="profile-img">
+                <i class="fas fa-user-tie"></i>
+            </div>
+        </div>
+        <h1>Yatharth Vardan</h1>
+        <div class="subtitle">Solutions Engineer | AI & Automation Specialist</div>
+        <p>Bridging the gap between cutting-edge LLM capabilities and tangible business value.</p>
+    </header>
+
+    <div class="container">
+        <!-- Summary Section -->
+        <section class="animate-fade">
+            <h2><i class="fas fa-user-astronaut"></i> Professional Summary</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                Solutions Engineer with 3.5+ years of experience at Instabase, specializing in deploying enterprise-grade AI and automation workflows for Global firms. Consistently recognized as a top-tier performer (Exceeds Expectations). Currently pursuing an M.S. in Applied AI, with deep technical expertise in RAG architectures, multi-agent orchestration, and rapid prototyping for complex unstructured data.
+            </p>
+        </section>
+
+        <!-- Experience Section -->
+        <section>
+            <h2><i class="fas fa-briefcase"></i> Experience Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">July 2022 – Present</div>
+                        <h3>Solution Engineer</h3>
+                        <h4>Instabase India Pvt. Ltd.</h4>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Lead Solutions Engineer – Strategic Digital Transformation (AXA): Managed a technical team of 7 to architect and deliver a comprehensive automation pipeline, resulting in a signed-off $12M annual reduction in operational expenses.</li>
+                            <li>International Technical Advisory: Led in-person technical workshops in the UK for senior AXA stakeholders.</li>
+                            <li>Performance Optimization: Refactored the BDX Ingestion system, reducing standard processing time from 5 days to <2 hours and scaling capacity by 6x.</li>
+                            <li>Crisis Response & Agility: Developed and deployed a custom ML solution in 3 days during a UK national safety crisis, leading to AXA winning the "Best Insurance Company Award 2023".</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jan 2022 – July 2022</div>
+                        <h3>Solution Engineering Intern</h3>
+                        <h4>Instabase India Pvt. Ltd.</h4>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Product Development: Built a 10K/10Q Financial Extraction application achieving 95.7% accuracy in extracting complex data from 200-page SEC filings.</li>
+                            <li>Technical POV: Led the Proof-of-Value for IHS Markit, delivering extraction models for structured Agent Notices (98.5% accuracy) and unstructured Quarterly Reports (93.4% accuracy).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2><i class="fas fa-laptop-code"></i> Knowledge Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-brain skill-icon"></i>
+                    <h3>AI & Machine Learning</h3>
+                    <p>LLM Application Development, RAG, Multi-Agent Systems, LangChain/LlamaIndex, Prompt Engineering, NLP</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <h3>Development</h3>
+                    <p>Python (Expert), REST API Architecture, ChromaDB, Vector Databases</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-comments-dollar skill-icon"></i>
+                    <h3>Strategic Advisory</h3>
+                    <p>Pre-sales Technical Discovery, Solution Architecture, Risk Mitigation, Enterprise SaaS</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2><i class="fas fa-project-diagram"></i> Key Projects</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>IPO Watch Agent | Multi-Agent RAG System</h3>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Architected an intelligent end-to-end pipeline using LangChain and ChromaDB to automate the analysis of complex SEC S-1 filings.</li>
+                            <li>Implemented a hybrid Multi-Agent structure featuring specialized agents for Financial, Risk, and Business analysis.</li>
+                            <li>Developed a novel LLM-based chunk validation agent that reduced vector space pollution by 50%.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Architect – TRG Standardization</h3>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Designed and implemented a 5-phase standardized protocol for technical reviews at Instabase, integrating AI-driven audits to automate risk identification.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section>
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="edu-container">
+                <div class="edu-card">
+                    <h3>M.S. in Applied Artificial Intelligence</h3>
+                    <p style="color: var(--secondary); font-weight: bold; margin: 0.5rem 0;">University of San Diego</p>
+                    <p>Expected 2026</p>
+                </div>
+                <div class="edu-card">
+                    <h3>B. Tech in Computer Science</h3>
+                    <p style="color: var(--secondary); font-weight: bold; margin: 0.5rem 0;">Delhi Technological University</p>
+                    <p>2018 – 2022 | 9.07 CGPA</p>
+                </div>
+                <div class="edu-card">
+                    <h3>GATE 2024 (Data Science & AI)</h3>
+                    <p style="color: var(--secondary); font-weight: bold; margin: 0.5rem 0;">All India Rank (AIR): 5322</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2>Let's Connect</h2>
+            <p>Interested in AI, automation, or just want to say hi?</p>
+            <div class="contact-links">
+                <a href="mailto:yatharthvardan@gmail.com" class="contact-btn">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/yatharthvardan" target="_blank" class="contact-btn" style="background: #0077b5;">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Scroll Animation Logic
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
